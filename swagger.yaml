@@ -24,19 +24,25 @@ paths:
           description: O número de CNPJ da empresa ou CPF da pessoa a ser pesquisado
           schema:
             type: string
-        - name: REFIN
+        - name: refin
           in: query
           required: false
           description: Se definido como true, retorna informações de Refin
           schema:
             type: boolean
-        - name: PEFIN
+        - name: callback
+          in: query
+          required: false
+          description: Contém a URL que receberá atualizações dos dados.
+          schema:
+            type: string
+        - name: pefin
           in: query
           required: false
           description: Se definido como true, retorna informações de Pefin
           schema:
             type: boolean
-        - name: Veiculos
+        - name: veiculos
           in: query
           required: false
           description: Se definido como true, retorna informações sobre veículos
