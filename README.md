@@ -172,10 +172,4 @@ fetch('https://irql.credithub.com.br/simples/abcdef12345/08075274000402', {
 - Alguns campos podem estar vazios ou nulos, dependendo da disponibilidade de informações.
 - A estrutura da resposta pode sofrer alterações futuras. Consulte a documentação oficial do CreditHub para obter informações atualizadas.
 
-### Parâmetros GET Adicionais
-
-- `REFIN` (opcional): Se definido como `true`, retorna informações de Refin.
-- `PEFIN` (opcional): Se definido como `true`, retorna informações de Pefin.
-- `Veiculos` (opcional): Se definido como `true`, retorna informações sobre veículos.
-
 Para mais detalhes e atualizações, consulte a [documentação oficial do CreditHub](https://github.com/iCheques/api-simples-doc/blob/main/README.md).
