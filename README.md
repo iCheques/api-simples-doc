@@ -2,6 +2,8 @@
 
 A API de Consulta de CNPJ/CPF CreditHub permite obter informações detalhadas sobre empresas brasileiras a partir de seu número de CNPJ e de pessoas físicas a partir do seu CPF.
 
+Devido à natureza assíncrona da consulta, a cada requisição à URL, novos dados podem estar disponíveis. Para receber atualizações contínuas sobre o status da consulta e obter os dados completos assim que estiverem prontos, utilize o parâmetro opcional `callback`. Ao fornecer uma URL válida como valor para callback, você receberá uma notificação nessa URL assim que a consulta for concluída ou houverem novas informações relevantes.
+
 ### Endpoint
 
 ```
@@ -23,7 +25,8 @@ GET
 
 - `refin` (opcional): Se definido como `true`, retorna informações de Refin.
 - `pefin` (opcional): Se definido como `true`, retorna informações de Pefin.
-- `Veiculos` (opcional): Se definido como `true`, retorna informações sobre veículos.
+- `veiculos` (opcional): Se definido como `true`, retorna informações sobre veículos.
+- `callback` (opcional): A URL que irá receber os JSONs com os dados atualizados.
 
 ### Cabeçalhos (Headers)
 
