@@ -10,7 +10,10 @@ paths:
   /simples/{SUA_API_KEY}/{CNPJ_OU_CPF_A_SER_PESQUISADO}:
     get:
       summary: Consulta de CNPJ/CPF
-      description: Retorna informações detalhadas sobre empresas ou pessoas físicas com base no CNPJ ou CPF.
+      description: |
+        Retorna informações detalhadas sobre empresas ou pessoas físicas com base no CNPJ ou CPF.
+        A consulta é assíncrona, ou seja, o resultado pode não estar disponível imediatamente.
+        Utilize o parâmetro `callback` para receber notificações sobre o andamento da consulta.
       parameters:
         - name: SUA_API_KEY
           in: path
@@ -49,17 +52,34 @@ paths:
           schema:
             type: boolean
       responses:
-        '200':
+        "200":
           description: Consulta realizada com sucesso
           content:
             application/json:
               schema:
                 type: object
                 properties:
+                  external-source:
+                    type: string
+                    enum:
+                      [
+                        "external-source loading",
+                        "success",
+                        "external-source error",
+                      ]
+                    description: >-
+                      Indica o estado da consulta:
+                      * external-source loading: A consulta foi recebida e aguarda processamento.
+                      * success: A consulta foi concluída e os dados estão disponíveis.
+                      * external-source error: Ocorreu um erro durante a consulta ou não há dados.
                   data:
                     type: object
                     description: Dados da consulta em JSON
-        '500':
+        "400":
+          description: Requisição inválida (parâmetros incorretos). Verifique se todos os parâmetros obrigatórios foram fornecidos e se os valores estão no formato correto.
+        "401":
+          description: Não autorizado (chave de API inválida ou ausente). Verifique se você está enviando a chave de API correta no cabeçalho da requisição.
+        "500":
           description: Erro interno do servidor
           content:
             application/xml:
