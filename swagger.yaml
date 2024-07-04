@@ -1,0 +1,89 @@
+openapi: 3.0.1
+info:
+  title: API de Consulta Simples JSON PJ/PF CreditHub
+  description: A API de Consulta de CNPJ/CPF CreditHub permite obter informações detalhadas sobre empresas brasileiras a partir de seu número de CNPJ e de pessoas físicas a partir do seu CPF.
+  version: 1.0.0
+servers:
+  - url: https://irql.credithub.com.br
+    description: Servidor principal
+paths:
+  /simples/{SUA_API_KEY}/{CNPJ_OU_CPF_A_SER_PESQUISADO}:
+    get:
+      summary: Consulta de CNPJ/CPF
+      description: Retorna informações detalhadas sobre empresas ou pessoas físicas com base no CNPJ ou CPF.
+      parameters:
+        - name: SUA_API_KEY
+          in: path
+          required: true
+          description: Sua chave de API fornecida pelo CreditHub
+          schema:
+            type: string
+        - name: CNPJ_OU_CPF_A_SER_PESQUISADO
+          in: path
+          required: true
+          description: O número de CNPJ da empresa ou CPF da pessoa a ser pesquisado
+          schema:
+            type: string
+        - name: REFIN
+          in: query
+          required: false
+          description: Se definido como true, retorna informações de Refin
+          schema:
+            type: boolean
+        - name: PEFIN
+          in: query
+          required: false
+          description: Se definido como true, retorna informações de Pefin
+          schema:
+            type: boolean
+        - name: Veiculos
+          in: query
+          required: false
+          description: Se definido como true, retorna informações sobre veículos
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Consulta realizada com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: Dados da consulta em JSON
+        '500':
+          description: Erro interno do servidor
+          content:
+            application/xml:
+              schema:
+                type: object
+                properties:
+                  BPQL:
+                    type: object
+                    properties:
+                      header:
+                        type: object
+                        properties:
+                          description:
+                            type: string
+                          date-time:
+                            type: string
+                          exception:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                example: GENERICO
+                              code:
+                                type: integer
+                                example: 0
+                              source:
+                                type: string
+                                example: GENERICO
+                              message:
+                                type: string
+                                example: É necessário uma chave de acesso
+                      body:
+                        type: object
