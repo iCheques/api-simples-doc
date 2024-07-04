@@ -39,10 +39,10 @@ Para utilizar a API CreditHub, você precisa de uma chave de API. 🔑
 
 **Como obter sua chave de API:**
 
-1. Acesse o site do CreditHub e crie uma conta.📝
-2. Após o login, vá para a seção "Minhas APIs" e clique em "Criar nova chave".➕
-3. Escolha um nome para sua chave e clique em "Criar".✅
-4. Sua chave de API será exibida na tela. Guarde-a em um local seguro.🔒
+**1.** Para obter sua chave de API, entre em contato com nossa equipe comercial através do e-mail contato@credithub.com.br. 🤝
+**2.** Nossa equipe irá auxiliá-lo no processo de aquisição da chave e fornecer todas as informações necessárias para começar a utilizar a API CreditHub. 📧
+
+**Importante:** Mantenha sua chave de API em segurança, pois ela é a sua credencial de acesso à API CreditHub. 🔒
 
 ### Endpoint
 
