@@ -4,11 +4,11 @@ A API de Consulta de CNPJ/CPF CreditHub é a ferramenta ideal para obter informa
 
 ### 1. Introdução
 
-**- O que é a API CreditHub?**🤔
+**O que é a API CreditHub?**🤔
 
 A API CreditHub é uma interface de programação de aplicações (API) que permite consultar informações sobre empresas e pessoas físicas no Brasil. Ela fornece dados como razão social, nome fantasia, endereço, situação cadastral, entre outros.💼
 
-**- Para que serve?**🔍
+**Para que serve?**🔍
 A API CreditHub é útil para diversas finalidades, como:
 
 **-> Análise de crédito:** Avalie a saúde financeira de empresas e pessoas físicas antes de conceder crédito.💰
