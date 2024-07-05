@@ -2,6 +2,42 @@
 
 A API de Consulta de CNPJ/CPF CreditHub é a ferramenta ideal para obter informações detalhadas e atualizadas sobre empresas (CNPJ) e pessoas físicas (CPF) no Brasil. 💼 Com ela, você pode integrar dados relevantes aos seus sistemas e tomar decisões mais assertivas. 🎯
 
+## Índice
+
+1.  **Introdução**
+    *   O que é a API CreditHub?
+    *   Para que serve?
+    *   Quem pode usar?
+    *   Benefícios
+2.  **Como utilizar**
+    *   Autenticação
+    *   Endpoint
+    *   Método
+    *   Parâmetros
+    *   Parâmetros Adicionais
+    *   Cabeçalhos (Headers)
+    *   Exemplos de Requisição
+    *   Formato de Resposta
+    *   Campos da Resposta
+        *   Campos Específicos para CNPJ
+        *   Campos Específicos para CPF
+        *   Campos Comuns para CNPJ e CPF
+    *   Consulta Serasa (Pefin)
+        *   Estrutura Geral
+        *   Descrição dos Campos
+            *   Dados Cadastrais (`user`)
+            *   Pendências Financeiras (`bello`)
+            *   Resumo das Pendências
+    *   Consulta Boa Vista (Refin)
+        *   Estrutura Geral
+        *   Campos Principais
+        *   Detalhes dos Campos em `dadosCadastrais`
+        *   Detalhes dos Campos em `spc`
+    *   Consulta Veículos
+        *   Estrutura JSON de Veículos
+        *   Descrição dos Campos
+        *   Observações
+
 ### 1. Introdução
 
 **O que é a API CreditHub?** 🤔
@@ -197,16 +233,9 @@ fetch("https://irql.credithub.com.br/simples/abcdef12345/08075274000402", {
 - `rfb`: Informações adicionais da Receita Federal.
 - `protestos`: Registro de protestos.
 - `processos`: Registro de processos judiciais.
-- `veiculos`: Lista de veículos associados, contendo:
-  - `placa`: Placa do veículo.
-  - `renavam`: Número do Renavam.
-  - `chassi`: Número do chassi.
-  - `marca`: Marca do veículo.
-  - `modelo`: Modelo do veículo.
-  - `anoFabricacao`: Ano de fabricação do veículo.
-  - `anoModelo`: Ano do modelo do veículo.
-  - `cor`: Cor do veículo.
-  - `tipo`: Tipo do veículo (carro, moto, caminhão, etc.).
+- `veiculos`: Veja documentação nas seções abaixo (Se solicitado)
+- `refin`: Veja documentação nas seções abaixo (Se solicitado)
+- `pefin`: Veja documentação nas seções abaixo (Se solicitado)
  
 # Consulta Serasa (Pefin)
 
@@ -280,57 +309,67 @@ fetch("https://irql.credithub.com.br/simples/abcdef12345/08075274000402", {
 ```
 
 
-**Campos**
+### Descrição dos Campos
 
-- **msg:** Mensagem de status da consulta (geralmente vazia).
-- **status:** Status da consulta ("sucesso" indica que a consulta foi realizada com sucesso).
-- **parametro:** Parâmetro de entrada da consulta (neste caso, o CNPJ da empresa).
-- **informacoes:** Array contendo informações sobre a empresa consultada.
+| Campo          | Descrição                                                                                               | Tipo    | Observações                                      |
+| :------------- | :-------------------------------------------------------------------------------------------------------- | :------ | :----------------------------------------------- |
+| `msg`          | Mensagem de status da consulta (geralmente vazia).                                                        | String  |                                                  |
+| `status`       | Status da consulta (`"sucesso"` indica consulta bem-sucedida).                                            | String  |                                                  |
+| `parametro`    | Parâmetro de entrada da consulta (normalmente o CNPJ da empresa).                                       | String  |                                                  |
+| `informacoes` | Array contendo informações detalhadas sobre a empresa consultada.                                       | Array   | Cada elemento é um objeto com dados da empresa.   |
 
-**Estrutura "user"**
+### Estrutura "informacoes" (Objeto da Empresa)
 
-- **Razao\_Social:** Razão social da empresa.
-- **CNPJ:** CNPJ da empresa.
-- **Nire:** Número de Identificação do Registro de Empresas (geralmente vazio para empresas limitadas).
-- **Data\_da\_Fundacao:** Data de fundação da empresa.
-- **Insc.\_Estadual:** Inscrição Estadual (pode estar vazia dependendo da atividade da empresa).
-- **Situacao\_CNPJ:** Situação cadastral do CNPJ na Receita Federal ("ATIVA" indica que o CNPJ está ativo).
-- **Data:** Data da consulta.
-- **Natureza\_Juridica:** Código e descrição da natureza jurídica da empresa.
-- **Ramo\_de\_Atividade\_Primario:** Código e descrição do ramo de atividade principal da empresa.
+Cada objeto dentro do array `informacoes` contém os seguintes campos:
 
-**Estrutura "bello"**
+#### Dados Cadastrais (`user`)
 
-Contém um array de objetos, cada um representando uma pendência financeira da empresa.
+| Campo                     | Descrição                                                                                                                               | Tipo    | Observações                                                                                                                                                                                                                                                                                                                                   |
+| :------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------- | :------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Razao_Social`           | Razão social da empresa.                                                                                                               | String  |                                                                                                                                                                                                                                                                                                                                        |
+| `CNPJ`                   | CNPJ da empresa.                                                                                                                    | String  |                                                                                                                                                                                                                                                                                                                                        |
+| `Nire`                   | Número de Identificação do Registro de Empresas (geralmente vazio para empresas limitadas).                                               | String  |                                                                                                                                                                                                                                                                                                                                        |
+| `Data_da_Fundacao`       | Data de fundação da empresa (formato: "DD/MM/AAAA").                                                                                      | String  |                                                                                                                                                                                                                                                                                                                                        |
+| `Insc._Estadual`         | Inscrição Estadual da empresa (pode estar vazia dependendo da atividade).                                                                 | String  |                                                                                                                                                                                                                                                                                                                                        |
+| `Situacao_CNPJ`          | Situação cadastral do CNPJ na Receita Federal ("ATIVA", "INAPTA", etc.).                                                               | String  |                                                                                                                                                                                                                                                                                                                                        |
+| `Data`                   | Data da consulta (formato: "DD/MM/AAAA").                                                                                               | String  |                                                                                                                                                                                                                                                                                                                                        |
+| `Natureza_Juridica`      | Código e descrição da natureza jurídica da empresa (ex: "2062 - SOCIEDADE EMPRESARIA LIMITADA").                                               | String  |                                                                                                                                                                                                                                                                                                                                        |
+| `Ramo_de_Atividade_Primario` | Código e descrição do ramo de atividade principal da empresa (CNAE).                                                                   | String  |                                                                                                                                                                                                                                                                                                                                        |
 
-- **ocorrencia:** Número da ocorrência (geralmente vazio).
-- **entrada:** Data de entrada da pendência (geralmente vazio).
-- **vencimento:** Data de vencimento da pendência.
-- **valor:** Valor da pendência.
-- **informante:** Fonte da informação sobre a pendência.
-- **contrato:** Número do contrato relacionado à pendência.
-- **avalista:** Indica se há avalista na pendência ("NAO" indica que não há).
-- **cidade:** Cidade do credor (geralmente vazio).
-- **uf:** Estado do credor (geralmente vazio).
-- **situacao:** Situação da pendência (geralmente vazio).
-- **credor:** Nome do credor.
-- **orgaoemissor:** Órgão emissor da informação sobre a pendência.
-- **totalpendencias:** Total de pendências com o mesmo credor 
-- **totalcredores:** Total de credores da empresa 
-- **totalvalor:** Valor total das pendências com o mesmo credor 
-- **categoria:** Categoria da pendência ("PENDÊNCIAS FINANCEIRAS", “DÍVIDAS VENCIDAS”, “RESTRIÇÕES FINANCEIRAS”).
-- **modalidade:** Modalidade da pendência ("OUTRAS OPER").
+#### Pendências Financeiras (`bello`)
 
-**Resumo das Pendências**
+| Campo          | Descrição                                                                                        | Tipo    | Observações                                                                                                                                                                                                                                                                                                                           |
+| :------------- | :------------------------------------------------------------------------------------------------ | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ocorrencia`   | Número da ocorrência (geralmente vazio).                                                           | String  |                                                                                                                                                                                                                                                                                                                                   |
+| `entrada`      | Data de entrada da pendência (geralmente vazio).                                                    | String  |                                                                                                                                                                                                                                                                                                                                   |
+| `vencimento`   | Data de vencimento da pendência (formato: "DD/MM/AAAA").                                              | String  |                                                                                                                                                                                                                                                                                                                                   |
+| `valor`        | Valor da pendência (formato: "X.XXX,XX", com ponto separando milhares e vírgula separando decimais). | String  |                                                                                                                                                                                                                                                                                                                                   |
+| `informante`   | Fonte da informação sobre a pendência (ex: "BASE I").                                               | String  |                                                                                                                                                                                                                                                                                                                                   |
+| `contrato`     | Número do contrato relacionado à pendência.                                                        | String  |                                                                                                                                                                                                                                                                                                                                   |
+| `avalista`     | Indica se há avalista na pendência ("SIM" ou "NAO").                                                | String  |                                                                                                                                                                                                                                                                                                                                   |
+| `cidade`       | Cidade do credor (geralmente vazio).                                                               | String  |                                                                                                                                                                                                                                                                                                                                   |
+| `uf`           | Estado do credor (geralmente vazio).                                                                 | String  |                                                                                                                                                                                                                                                                                                                                   |
+| `situacao`     | Situação da pendência (geralmente vazio).                                                           | String  |                                                                                                                                                                                                                                                                                                                                   |
+| `credor`       | Nome do credor.                                                                                     | String  |                                                                                                                                                                                                                                                                                                                                   |
+| `orgaoemissor` | Órgão emissor da informação sobre a pendência.                                                    | String  |                                                                                                                                                                                                                                                                                                                                   |
+| `totalpendencias` | Total de pendências com o mesmo credor (normalmente "1").                                           | String  |                                                                                                                                                                                                                                                                                                                                   |
+| `totalcredores` | Total de credores da empresa (pode estar vazio).                                                   | String  |                                                                                                                                                                                                                                                                                                                                   |
+| `totalvalor`    | Valor total das pendências com o mesmo credor (igual ao `valor` se houver apenas uma pendência).    | String  | Formato: "X.XXX,XX" (ponto para milhares, vírgula para decimais).                                                                                                                                                                                                                                                                       |
+| `categoria`    | Categoria da pendência ("PENDÊNCIAS FINANCEIRAS", "DÍVIDAS VENCIDAS", "RESTRIÇÕES FINANCEIRAS").   | String  |                                                                                                                                                                                                                                                                                                                                   |
+| `modalidade`   | Modalidade da pendência ("OUTRAS OPER").                                                           | String  |                                                                                                                                                                                                                                                                                                                                   |
 
-- **valorTotalPendencias:** Valor total de todas as pendências da empresa.
-- **total:** Número total de pendências da empresa.
-- **valorTotalPendenciasFinanceiras:** Valor total das pendências financeiras.
-- **totalPendenciasFinanceiras:** Número total de pendências financeiras.
-- **valorTotalPendenciasRefin:** Valor total das pendências relacionadas a refinanciamento 
-- **totalPendenciasRefin:** Número total de pendências relacionadas a refinanciamento 
-- **valorTotalPendenciasVencidas:** Valor total das pendências vencidas 
-- **totalPendenciasVencidas:** Número total de pendências vencidas 
+#### Resumo das Pendências
+
+| Campo                       | Descrição                                                                                                                                | Tipo   | Observações                                                                                                                                                                                                                                                                                                                           |
+| :-------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- | :----- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `valorTotalPendencias`      | Valor total de todas as pendências da empresa (formato: "X.XXX,XX").                                                                    | Number |                                                                                                                                                                                                                                                                                                                                   |
+| `total`                    | Número total de pendências da empresa.                                                                                                 | Number |                                                                                                                                                                                                                                                                                                                                   |
+| `valorTotalPendenciasFinanceiras` | Valor total das pendências financeiras (formato: "X.XXX,XX").                                                                          | Number |                                                                                                                                                                                                                                                                                                                                   |
+| `totalPendenciasFinanceiras` | Número total de pendências financeiras.                                                                                                | Number |                                                                                                                                                                                                                                                                                                                                   |
+| `valorTotalPendenciasRefin`  | Valor total das pendências relacionadas a refinanciamento (formato: "X.XXX,XX").                                                            | Number |                                                                                                                                                                                                                                                                                                                                   |
+| `totalPendenciasRefin`     | Número total de pendências relacionadas a refinanciamento.                                                                                | Number |                                                                                                                                                                                                                                                                                                                                   |
+| `valorTotalPendenciasVencidas` | Valor total das pendências vencidas (formato: "X.XXX,XX").                                                                               | Number |                                                                                                                                                                                                                                                                                                                                   |
+| `totalPendenciasVencidas`  | Número total de pendências vencidas.                                                                                                   | Number |                                                                                                                                                                                                                                                                                                                                   |
 
 # Consulta Boa Vista (Refin)
 **Estrutura Geral**
@@ -407,57 +446,99 @@ Contém um array de objetos, cada um representando uma pendência financeira da 
 }
 ```
 
-**Campos:**
+### Campos Principais
 
-- **dadosCadastrais:** Array contendo um objeto com informações cadastrais da empresa ou indivíduo.
-- **spc:** Array contendo arrays de objetos, cada um representando uma pendência financeira no SPC.
-- **consultaRealizada:** Array que parece estar vazio neste exemplo, possivelmente usado para armazenar informações sobre a consulta.
+| Campo             | Descrição                                                                                 | Tipo    | Observações                                                                                                                                                                                                                                                                                                                                   |
+| :----------------- | :--------------------------------------------------------------------------------------- | :------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `dadosCadastrais` | Array contendo informações cadastrais da empresa ou indivíduo.                             | Array   | Contém um único objeto com os detalhes cadastrais.                                                                                                                                                                                                                                                                                             |
+| `spc`             | Array de arrays, cada um contendo objetos que representam pendências financeiras no SPC. | Array   | Cada sub-array agrupa pendências do mesmo credor.                                                                                                                                                                                                                                                                                          |
+| `consultaRealizada` | Array possivelmente usado para armazenar informações sobre a consulta (vazio no exemplo). | Array   |                                                                                                                                                                                                                                                                                                                                        |
 
-**Estrutura "dadosCadastrais"**
+### Detalhes dos Campos em `dadosCadastrais`
 
-- **CpfCnpj:** CPF ou CNPJ da empresa ou indivíduo.
-- **Protocolo:** Protocolo da consulta (vazio neste caso).
-- **NomeRazao:** Nome ou razão social da empresa ou indivíduo.
-- **NomeFantasia:** Nome fantasia da empresa (se aplicável).
-- **NascimentoFundacao:** Data de nascimento (para indivíduos) ou fundação (para empresas).
-- **Idade:** Idade da empresa ou indivíduo (parece duplicar a informação de NascimentoFundacao).
-- **Sexo:** Sexo do indivíduo (vazio para empresas).
-- **Signo:** Signo astrológico do indivíduo (vazio para empresas).
-- **NomeMae:** Nome da mãe do indivíduo (vazio para empresas).
-- **NomePai:** Nome do pai do indivíduo (vazio para empresas).
-- **Rg:** Número do RG do indivíduo (vazio para empresas).
-- **OrigemCpf:** Origem do CPF (vazio neste caso).
-- **DataSituacaoCadastral:** Data da última atualização da situação cadastral.
-- **SituacaoCadastral:** Situação cadastral atual do CPF ou CNPJ (por exemplo, "ATIVO").
-- **CapitalSocial:** Capital social da empresa (nulo para indivíduos).
-- **NaturezaJuridica:** Natureza jurídica da empresa (vazio neste caso).
-- **AtividadeEconomicaPrincipal:** Atividade econômica principal da empresa (vazio neste caso).
-- **AtividadeEconomicaSecundaria:** Atividades econômicas secundárias da empresa.
-- **Endereco:** Endereço da empresa ou indivíduo.
-- **Numero:** Número do endereço.
-- **Complemento:** Complemento do endereço.
-- **Bairro:** Bairro do endereço.
-- **Cidade:** Cidade do endereço.
-- **Uf:** Estado do endereço.
-- **Cep:** CEP do endereço.
-- **DataConsulta:** Data e hora da consulta.
+| Campo                    | Descrição                                                                                                                                | Tipo    | Observações                                                               |
+| :------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------- | :------ | :------------------------------------------------------------------------ |
+| `CpfCnpj`                | CPF (indivíduo) ou CNPJ (empresa).                                                                                                      | String  |                                                                           |
+| `Protocolo`              | Protocolo da consulta (pode estar vazio).                                                                                                | String  |                                                                           |
+| `NomeRazao`             | Nome completo (indivíduo) ou Razão Social (empresa).                                                                                     | String  |                                                                           |
+| `NomeFantasia`          | Nome Fantasia da empresa (se houver).                                                                                                    | String  |                                                                           |
+| `NascimentoFundacao`   | Data de nascimento (indivíduo) ou fundação (empresa).                                                                                      | String  | Formato: "DD/MM/AAAA"                                                     |
+| `Idade`                 | Idade do indivíduo ou tempo de existência da empresa (parece duplicar a informação de `NascimentoFundacao`).                                | String  | Formato: "DD/MM/AAAA"                                                     |
+| `Sexo`                  | Sexo do indivíduo (M/F) ou vazio para empresas.                                                                                             | String  |                                                                           |
+| `Signo`                 | Signo astrológico do indivíduo (se disponível) ou vazio para empresas.                                                                      | String  |                                                                           |
+| `NomeMae`               | Nome da mãe do indivíduo (se disponível) ou vazio para empresas.                                                                             | String  |                                                                           |
+| `NomePai`               | Nome do pai do indivíduo (se disponível) ou vazio para empresas.                                                                             | String  |                                                                           |
+| `Rg`                    | Número do RG do indivíduo (se disponível) ou vazio para empresas.                                                                           | String  |                                                                           |
+| `OrigemCpf`             | Origem do CPF (se disponível) ou vazio.                                                                                                   | String  |                                                                           |
+| `DataSituacaoCadastral` | Data da última atualização da situação cadastral.                                                                                        | String  | Formato: "DD/MM/AAAA"                                                     |
+| `SituacaoCadastral`    | Situação cadastral atual do CPF ou CNPJ (ex: "ATIVO", "INATIVO", "SUSPENSO").                                                             | String  |                                                                           |
+| `CapitalSocial`         | Capital social da empresa (valor numérico) ou nulo para indivíduos.                                                                        | Number  |                                                                           |
+| `NaturezaJuridica`      | Natureza jurídica da empresa (ex: "Sociedade Empresária Limitada") ou vazio para indivíduos.                                               | String  |                                                                           |
+| `AtividadeEconomicaPrincipal` | Código da atividade econômica principal da empresa (CNAE) ou vazio para indivíduos.                                                         | String  |                                                                           |
+| `AtividadeEconomicaSecundaria` | Array de códigos de atividades econômicas secundárias da empresa (CNAE) ou nulo para indivíduos.                                            | Array   |                                                                           |
+| `Endereco`, `Numero`, `Complemento`, `Bairro`, `Cidade`, `Uf`, `Cep` | Informações de endereço (podem estar vazias).                                                                                                | String  |                                                                           |
+| `DataConsulta`          | Data e hora em que a consulta foi realizada.                                                                                             | String  | Formato: "DD/MM/AAAA HH:MM:SS"                                            |
 
-**Estrutura "spc"**
+### Detalhes dos Campos em `spc`
 
-Contém um array de arrays de objetos. Cada objeto representa uma pendência financeira no SPC.
-
-- **NomeAssociado:** Nome da empresa associada ao SPC que registrou a pendência.
-- **Valor:** Valor da pendência.
-- **DataDeInclusao:** Data em que a pendência foi incluída no SPC.
-- **DataDoVencimento:** Data de vencimento original da pendência.
-- **Entidade:** Entidade relacionada à pendência .
-- **NumeroContrato:** Número do contrato relacionado à pendência.
-- **CompradorFiadorAvalista:** Indica se o devedor é comprador, fiador ou avalista na pendência.
-- **TelefoneAssociado:** Telefone da empresa associada.
-- **CidadeAssociado:** Cidade da empresa associada 
-- **UfAssociado:** Estado da empresa associada
+| Campo                 | Descrição                                                                            | Tipo    | Observações                                           |
+| :--------------------- | :---------------------------------------------------------------------------------- | :------ | :---------------------------------------------------- |
+| `NomeAssociado`       | Nome da empresa credora que registrou a pendência.                                  | String  |                                                       |
+| `Valor`               | Valor da pendência.                                                                | String  | Formato: "XXXX,XX" (utilizar vírgula como separador decimal) |
+| `DataDeInclusao`     | Data de inclusão da pendência no SPC.                                                | String  | Formato: "DD/MM/AAAA"                                  |
+| `DataDoVencimento`    | Data original de vencimento da dívida.                                               | String  | Formato: "DD/MM/AAAA"                                  |
+| `Entidade`            | Entidade relacionada à pendência (pode estar vazio).                                | String  |                                                       |
+| `NumeroContrato`      | Número do contrato relacionado à pendência.                                          | String  |                                                       |
+| `CompradorFiadorAvalista` | Indica o papel do devedor na pendência ("COMPRADOR", "FIADOR" ou "AVALISTA").     | String  |                                                       |
+| `TelefoneAssociado`   | Telefone da empresa credora (pode estar vazio).                                     | String  |                                                       |
+| `CidadeAssociado`    | Cidade da empresa credora (pode estar vazio).                                      | String  |                                                       |
+| `UfAssociado`        | Estado da empresa credora (pode estar vazio).                                       | String  |                                                       |
 
 
+# Consulta Veículos
+
+## Estrutura JSON de Veículos
+
+Este JSON contém informações sobre um ou mais veículos.
+
+```json
+[
+    {
+      "placa": "PYI0623",
+      "municipio": "Teresina",
+      "uf": "PI",
+      "renavam": "1097352517",
+      "chassi": "9BHBG41DAHP651525",
+      "motor": "F4FAGU189152",
+      "ano_fabricacao": "2016",
+      "ano_modelo": "2017",
+      "marca_modelo": "HYUNDAI/HB20S 1.6M COMF",
+      "procedencia": "",
+      "especie": "",
+      "combustivel": "ALCOOL/GASOLINA",
+      "cor": "BRANCA"
+    }
+]
+```
+
+### Descrição dos Campos
+
+| Campo           | Descrição                                   | Tipo    | Observações                                      |
+| :-------------- | :---------------------------------------- | :------ | :----------------------------------------------- |
+| `veiculos`      | Array contendo objetos com dados dos veículos. | Array   |                                                  |
+| `placa`         | Placa do veículo.                           | String  |                                                  |
+| `municipio`     | Município de registro do veículo.           | String  |                                                  |
+| `uf`            | Estado de registro do veículo (sigla).       | String  |                                                  |
+| `renavam`       | Número do RENAVAM.                         | String  |                                                  |
+| `chassi`        | Número do chassi.                          | String  |                                                  |
+| `motor`         | Número do motor.                           | String  |                                                  |
+| `ano_fabricacao` | Ano de fabricação.                         | String  | Formato numérico (ex: "2016").                   |
+| `ano_modelo`    | Ano do modelo.                            | String  | Formato numérico (ex: "2017").                   |
+| `marca_modelo`   | Marca e modelo do veículo.                   | String  |                                                  |
+| `procedencia`   | Procedência do veículo.                     | String  | Pode estar vazio.                                 |
+| `especie`       | Espécie do veículo.                         | String  | Pode estar vazio.                                 |
+| `combustivel`   | Tipo de combustível.                       | String  |                                                  |
+| `cor`           | Cor do veículo.                            | String  |                                                  |
 
 
 ### Observações
