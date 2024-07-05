@@ -207,6 +207,258 @@ fetch("https://irql.credithub.com.br/simples/abcdef12345/08075274000402", {
   - `anoModelo`: Ano do modelo do veículo.
   - `cor`: Cor do veículo.
   - `tipo`: Tipo do veículo (carro, moto, caminhão, etc.).
+ 
+# Consulta Serasa (Pefin)
+
+**Estrutura Geral**
+
+```json
+{
+    "msg": "",
+    "status": "sucesso",
+    "parametro": "02492851000124",
+    "informacoes": [{
+        "user": {
+            "Razao_Social": "AXON OLEO & GAS COMERCIO DE PECAS SOBRESSALENTES LTDA",
+            "CNPJ": "02492851000124",
+            "Nire": "",
+            "Data_da_Fundacao": "28/04/1998",
+            "Insc._Estadual": "",
+            "Situacao_CNPJ": "ATIVA",
+            "Data": "03/07/2024",
+            "Natureza_Juridica": "2062-SOCIEDADE EMPRESARIA LIMITADA",
+            "Ramo_de_Atividade_Primario": "4663000-COMÉRCIO ATACADISTA DE MÁQUINAS E EQUIPAMENTOS PARA USO INDUSTRIAL; PARTES E PEÇAS"
+        },
+        "bello": [{
+                "ocorrencia": "",
+                "entrada": "",
+                "vencimento": "10/04/2024",
+                "valor": "4.069,28",
+                "informante": "BASE I",
+                "contrato": "4100177816",
+                "avalista": "NAO",
+                "cidade": "",
+                "uf": "",
+                "situacao": "",
+                "credor": "PETROLEO BRASILEIRO S/A PETROBRAS",
+                "orgaoemissor": "SerasaExperian-Pefin",
+                "totalpendencias": "1",
+                "totalcredores": "",
+                "totalvalor": "4.069,28",
+                "categoria": "PENDÊNCIAS FINANCEIRAS",
+                "modalidade": "OUTRAS OPER"
+            },
+            {
+                "ocorrencia": "",
+                "entrada": "",
+                "vencimento": "11/02/2024",
+                "valor": "286.045,69",
+                "informante": "BASE I",
+                "contrato": "000615127",
+                "avalista": "NAO",
+                "cidade": "",
+                "uf": "",
+                "situacao": "",
+                "credor": "PETROLEO BRASILEIRO S/A PETROBRAS",
+                "orgaoemissor": "SerasaExperian-Pefin",
+                "totalpendencias": "1",
+                "totalcredores": "",
+                "totalvalor": "286.045,69",
+                "categoria": "PENDÊNCIAS FINANCEIRAS",
+                "modalidade": "OUTRAS OPER"
+         }],
+        "valorTotalPendencias": 2449395.40,
+        "total": 43,
+        "valorTotalPendenciasFinanceiras": 2449395.40,
+        "totalPendenciasFinanceiras": 43,
+        "valorTotalPendenciasRefin": 0,
+        "totalPendenciasRefin": 0,
+        "valorTotalPendenciasVencidas": 0,
+        "totalPendenciasVencidas": 0
+    }]
+}
+```
+
+
+**Campos**
+
+- **msg:** Mensagem de status da consulta (geralmente vazia).
+- **status:** Status da consulta ("sucesso" indica que a consulta foi realizada com sucesso).
+- **parametro:** Parâmetro de entrada da consulta (neste caso, o CNPJ da empresa).
+- **informacoes:** Array contendo informações sobre a empresa consultada.
+
+**Estrutura "user"**
+
+- **Razao\_Social:** Razão social da empresa.
+- **CNPJ:** CNPJ da empresa.
+- **Nire:** Número de Identificação do Registro de Empresas (geralmente vazio para empresas limitadas).
+- **Data\_da\_Fundacao:** Data de fundação da empresa.
+- **Insc.\_Estadual:** Inscrição Estadual (pode estar vazia dependendo da atividade da empresa).
+- **Situacao\_CNPJ:** Situação cadastral do CNPJ na Receita Federal ("ATIVA" indica que o CNPJ está ativo).
+- **Data:** Data da consulta.
+- **Natureza\_Juridica:** Código e descrição da natureza jurídica da empresa.
+- **Ramo\_de\_Atividade\_Primario:** Código e descrição do ramo de atividade principal da empresa.
+
+**Estrutura "bello"**
+
+Contém um array de objetos, cada um representando uma pendência financeira da empresa.
+
+- **ocorrencia:** Número da ocorrência (geralmente vazio).
+- **entrada:** Data de entrada da pendência (geralmente vazio).
+- **vencimento:** Data de vencimento da pendência.
+- **valor:** Valor da pendência.
+- **informante:** Fonte da informação sobre a pendência.
+- **contrato:** Número do contrato relacionado à pendência.
+- **avalista:** Indica se há avalista na pendência ("NAO" indica que não há).
+- **cidade:** Cidade do credor (geralmente vazio).
+- **uf:** Estado do credor (geralmente vazio).
+- **situacao:** Situação da pendência (geralmente vazio).
+- **credor:** Nome do credor.
+- **orgaoemissor:** Órgão emissor da informação sobre a pendência.
+- **totalpendencias:** Total de pendências com o mesmo credor 
+- **totalcredores:** Total de credores da empresa 
+- **totalvalor:** Valor total das pendências com o mesmo credor 
+- **categoria:** Categoria da pendência ("PENDÊNCIAS FINANCEIRAS", “DÍVIDAS VENCIDAS”, “RESTRIÇÕES FINANCEIRAS”).
+- **modalidade:** Modalidade da pendência ("OUTRAS OPER").
+
+**Resumo das Pendências**
+
+- **valorTotalPendencias:** Valor total de todas as pendências da empresa.
+- **total:** Número total de pendências da empresa.
+- **valorTotalPendenciasFinanceiras:** Valor total das pendências financeiras.
+- **totalPendenciasFinanceiras:** Número total de pendências financeiras.
+- **valorTotalPendenciasRefin:** Valor total das pendências relacionadas a refinanciamento 
+- **totalPendenciasRefin:** Número total de pendências relacionadas a refinanciamento 
+- **valorTotalPendenciasVencidas:** Valor total das pendências vencidas 
+- **totalPendenciasVencidas:** Número total de pendências vencidas 
+
+# Consulta Boa Vista (Refin)
+**Estrutura Geral**
+
+```json
+{
+    "dadosCadastrais": [{
+        "CpfCnpj": "02492851000124",
+        "Protocolo": "",
+        "NomeRazao": "AXON OLEO & GAS",
+        "NomeFantasia": "AXON OLEO & GAS COMERCIO DE PECAS SOBRESSALENTES LTDA",
+        "NascimentoFundacao": "28/04/1998",
+        "Idade": "28/04/1998",
+        "Sexo": "",
+        "Signo": "",
+        "NomeMae": "",
+        "NomePai": "",
+        "Rg": "",
+        "OrigemCpf": "",
+        "DataSituacaoCadastral": "03/07/2024",
+        "SituacaoCadastral": "ATIVO",
+        "CapitalSocial": null,
+        "NaturezaJuridica": "",
+        "AtividadeEconomicaPrincipal": "",
+        "AtividadeEconomicaSecundaria": null,
+        "Endereco": null,
+        "Numero": null,
+        "Complemento": null,
+        "Bairro": null,
+        "Cidade": null,
+        "Uf": null,
+        "Cep": null,
+        "DataConsulta": "03/07/2024 03:36:01"
+    }],
+    "spc": [
+        [{
+                "NomeAssociado": "BANCO SANTANDER S/A",
+                "Valor": "5356,12",
+                "DataDeInclusao": "22/01/2024",
+                "DataDoVencimento": "05/12/2023",
+                "Entidade": "",
+                "NumeroContrato": "MP385666000002791066",
+                "CompradorFiadorAvalista": "COMPRADOR",
+                "TelefoneAssociado": "",
+                "CidadeAssociado": "",
+                "UfAssociado": ""
+            },
+            {
+                "NomeAssociado": "BANCO SANTANDER S/A",
+                "Valor": "73934,2",
+                "DataDeInclusao": "04/01/2024",
+                "DataDoVencimento": "18/11/2023",
+                "Entidade": "",
+                "NumeroContrato": "UG385630000000285030",
+                "CompradorFiadorAvalista": "COMPRADOR",
+                "TelefoneAssociado": "",
+                "CidadeAssociado": "",
+                "UfAssociado": ""
+            },
+            {
+                "NomeAssociado": "BANCO SANTANDER S/A",
+                "Valor": "1584,41",
+                "DataDeInclusao": "14/12/2023",
+                "DataDoVencimento": "26/09/2023",
+                "Entidade": "",
+                "NumeroContrato": "DE03856130017181",
+                "CompradorFiadorAvalista": "COMPRADOR",
+                "TelefoneAssociado": "",
+                "CidadeAssociado": "",
+                "UfAssociado": ""
+            }
+        ]
+    ]
+}
+```
+
+**Campos:**
+
+- **dadosCadastrais:** Array contendo um objeto com informações cadastrais da empresa ou indivíduo.
+- **spc:** Array contendo arrays de objetos, cada um representando uma pendência financeira no SPC.
+- **consultaRealizada:** Array que parece estar vazio neste exemplo, possivelmente usado para armazenar informações sobre a consulta.
+
+**Estrutura "dadosCadastrais"**
+
+- **CpfCnpj:** CPF ou CNPJ da empresa ou indivíduo.
+- **Protocolo:** Protocolo da consulta (vazio neste caso).
+- **NomeRazao:** Nome ou razão social da empresa ou indivíduo.
+- **NomeFantasia:** Nome fantasia da empresa (se aplicável).
+- **NascimentoFundacao:** Data de nascimento (para indivíduos) ou fundação (para empresas).
+- **Idade:** Idade da empresa ou indivíduo (parece duplicar a informação de NascimentoFundacao).
+- **Sexo:** Sexo do indivíduo (vazio para empresas).
+- **Signo:** Signo astrológico do indivíduo (vazio para empresas).
+- **NomeMae:** Nome da mãe do indivíduo (vazio para empresas).
+- **NomePai:** Nome do pai do indivíduo (vazio para empresas).
+- **Rg:** Número do RG do indivíduo (vazio para empresas).
+- **OrigemCpf:** Origem do CPF (vazio neste caso).
+- **DataSituacaoCadastral:** Data da última atualização da situação cadastral.
+- **SituacaoCadastral:** Situação cadastral atual do CPF ou CNPJ (por exemplo, "ATIVO").
+- **CapitalSocial:** Capital social da empresa (nulo para indivíduos).
+- **NaturezaJuridica:** Natureza jurídica da empresa (vazio neste caso).
+- **AtividadeEconomicaPrincipal:** Atividade econômica principal da empresa (vazio neste caso).
+- **AtividadeEconomicaSecundaria:** Atividades econômicas secundárias da empresa.
+- **Endereco:** Endereço da empresa ou indivíduo.
+- **Numero:** Número do endereço.
+- **Complemento:** Complemento do endereço.
+- **Bairro:** Bairro do endereço.
+- **Cidade:** Cidade do endereço.
+- **Uf:** Estado do endereço.
+- **Cep:** CEP do endereço.
+- **DataConsulta:** Data e hora da consulta.
+
+**Estrutura "spc"**
+
+Contém um array de arrays de objetos. Cada objeto representa uma pendência financeira no SPC.
+
+- **NomeAssociado:** Nome da empresa associada ao SPC que registrou a pendência.
+- **Valor:** Valor da pendência.
+- **DataDeInclusao:** Data em que a pendência foi incluída no SPC.
+- **DataDoVencimento:** Data de vencimento original da pendência.
+- **Entidade:** Entidade relacionada à pendência .
+- **NumeroContrato:** Número do contrato relacionado à pendência.
+- **CompradorFiadorAvalista:** Indica se o devedor é comprador, fiador ou avalista na pendência.
+- **TelefoneAssociado:** Telefone da empresa associada.
+- **CidadeAssociado:** Cidade da empresa associada 
+- **UfAssociado:** Estado da empresa associada
+
+
+
 
 ### Observações
 
