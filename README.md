@@ -22,13 +22,13 @@ A API de Consulta de CNPJ/CPF CreditHub é a ferramenta ideal para obter informa
         *   Campos Específicos para CNPJ
         *   Campos Específicos para CPF
         *   Campos Comuns para CNPJ e CPF
-    *   Consulta Serasa (Pefin)
+    *   Consulta Pefin/Refin Serasa (PF/PJ)
         *   Estrutura Geral
         *   Descrição dos Campos
             *   Dados Cadastrais (`user`)
             *   Pendências Financeiras (`bello`)
             *   Resumo das Pendências
-    *   Consulta Boa Vista (Refin)
+    *   Consulta Pefin/Refin Boa Vista (PF/PJ)
         *   Estrutura Geral
         *   Campos Principais
         *   Detalhes dos Campos em `dadosCadastrais`
