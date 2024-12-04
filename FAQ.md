@@ -47,3 +47,19 @@ Não. A Consulta Simples foi projetada para lidar com toda essa complexidade, pa
 
 ### O CALLBACK pode ser usado para forçar uma nova consulta no mesmo dia?
 Não. A chave para identificar a consulta é composta pela **APIKEY**, o dia da consulta e o documento consultado. Mesmo que você envie um CALLBACK diferente, ele será ignorado. Apenas o primeiro CALLBACK enviado será considerado válido.
+
+### Por que recebo o CALLBACK mais de uma vez?
+
+O CreditHub funciona como um HUB de crédito, integrando informações de diversas fontes, como tribunais, cartórios e outros sistemas. Para facilitar sua experiência, centralizamos todas essas informações e entregamos para você, eliminando a necessidade de consultar cada fonte individualmente.
+
+Por conta disso, é possível que você receba múltiplos CALLBACKs para uma mesma consulta, à medida que novas informações são agregadas ao longo do dia. É importante salientar que em 99.9% dos casos elas retornam em menos de 1 minuto.
+
+### Como saber qual é o retorno definitivo?
+
+O retorno definitivo, normalmente, será o último enviado no dia da consulta. Ele consolida todas as informações disponíveis até aquele momento. Recomendamos sempre verificar o campo **`.status`** ou outro identificador no JSON, que pode indicar se a consulta foi concluída ou ainda está em processamento.
+
+### O que devo fazer ao receber múltiplos CALLBACKs?
+
+Sua aplicação deve estar preparada para lidar com esses retornos. É importante tratar os CALLBACKs como incrementais, sempre substituindo as informações anteriores pelas mais recentes até o encerramento da consulta no dia.
+
+Se precisar de ajuda para implementar essa lógica, entre em contato com nossa equipe! 😊
