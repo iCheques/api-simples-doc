@@ -63,3 +63,12 @@ O retorno definitivo, normalmente, será o último enviado no dia da consulta. E
 Sua aplicação deve estar preparada para lidar com esses retornos. É importante tratar os CALLBACKs como incrementais, sempre substituindo as informações anteriores pelas mais recentes até o encerramento da consulta no dia.
 
 Se precisar de ajuda para implementar essa lógica, entre em contato com nossa equipe! 😊
+
+### O CALLBACK é enviado antes ou depois da resposta HTTP?
+Se você optar por usar o CALLBACK, ele será enviado antes mesmo da resposta HTTP. Isso permite que os dados sejam renderizados à medida que ficam disponíveis, proporcionando uma interação mais dinâmica.
+
+### O que acontece se o retorno indicar `"completed": false`?
+Caso o CALLBACK retorne `"completed": false`, ele continuará enviando as informações restantes assim que forem obtidas. Alternativamente, você pode realizar uma nova requisição HTTP após alguns instantes para buscar os dados mais atualizados.
+
+### Qual é a melhor abordagem para fornecer uma boa experiência ao usuário?
+Depende da experiência que você deseja oferecer. Muitos usuários preferem uma experiência instantânea, onde os dados são entregues gradualmente pelo CALLBACK à medida que ficam disponíveis. Isso pode ser mais eficiente e agradável do que aguardar por uma única resposta HTTP consolidada.
