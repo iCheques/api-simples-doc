@@ -56,7 +56,7 @@ A API CreditHub é útil para diversas finalidades, como:
 
 **Quem pode usar?** 👥
 
-Qualquer pessoa ou empresa que precise de informações sobre CNPJs ou CPFs pode usar a API CreditHub. Desenvolvedores, analistas de crédito, profissionais de marketing e compliance são alguns exemplos de usuários que podem se beneficiar desta ferramenta. 👨‍💻👩‍💼
+Qualquer pessoa ou empresa que precise de informações sobre CNPJs ou CPFs pode usar a API CreditHub. Desenvolvedores, analistas de crédito e compliance são alguns exemplos de usuários que podem se beneficiar desta ferramenta. 👨‍💻👩‍💼
 
 **Benefícios:** ✨
 
