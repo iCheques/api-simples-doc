@@ -236,6 +236,7 @@ fetch("https://irql.credithub.com.br/simples/abcdef12345/08075274000402", {
 - `veiculos`: Veja documentação nas seções abaixo (Se solicitado)
 - `refin`: Veja documentação nas seções abaixo (Se solicitado)
 - `pefin`: Veja documentação nas seções abaixo (Se solicitado)
+- `completed`: Indica que todas as consulta foram concluídas
  
 # Consulta Serasa (Pefin)
 
