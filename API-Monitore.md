@@ -4,13 +4,13 @@
 
 O **Monitore** é um serviço de monitoramento contínuo de documentos (CPF/CNPJ). Ao cadastrar um documento, o sistema realiza consultas periódicas e automáticas nas seguintes bases:
 
-| Base | Descrição | Frequência |
-|------|-----------|------------|
-| **Receita Federal (RFB)** | Situação cadastral, sócios e capital social | A cada 2 dias |
-| **Protestos** | Quantidade de protestos registrados | A cada 2 dias |
-| **CCF (Cheques sem Fundo)** | Ocorrências no Cadastro de Emitentes de Cheques sem Fundos | A cada 15 dias |
-| **Processos Judiciais** | Quantidade de processos judiciais | A cada 2 dias |
-| **Liminares** | Existência de liminares | A cada 3 dias úteis |
+| Base | Descrição |
+|------|-----------|
+| **Receita Federal (RFB)** | Situação cadastral, sócios e capital social |
+| **Protestos** | Quantidade de protestos registrados |
+| **CCF (Cheques sem Fundo)** | Ocorrências no Cadastro de Emitentes de Cheques sem Fundos |
+| **Processos Judiciais** | Quantidade de processos judiciais |
+| **Liminares** | Existência de liminares |
 
 Quando há alteração no status monitorado, o sistema dispara alertas automaticamente.
 
