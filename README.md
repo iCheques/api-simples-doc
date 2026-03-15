@@ -100,8 +100,8 @@ GET
 
 ### Parâmetros Adicionais
 
-- `pefin|refin` (opcional): `pefin=true` retorna informações de PEFIN/REFIN Serasa;
-- `refin=true` retorna informações de PEFIN/REFIN Boa Vista.
+- `serasa=ture` (opcional): retorna informações de PEFIN/REFIN Serasa;
+- `boavista=true` retorna informações de PEFIN/REFIN Boa Vista.
 - `veiculos` (opcional): Se definido como `true`, retorna informações sobre veículos.
 - `callback` (opcional): URL que receberá os JSONs com os dados atualizados (notificações de andamento da consulta).
 
