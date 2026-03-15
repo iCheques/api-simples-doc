@@ -27,13 +27,13 @@ paths:
           description: O número de CNPJ da empresa ou CPF da pessoa a ser pesquisado
           schema:
             type: string
-        - name: pefin
+        - name: serasa
           in: query
           required: false
           description: Parâmetro pefin|refin. Se true, retorna informações de PEFIN/REFIN Serasa.
           schema:
             type: boolean
-        - name: refin
+        - name: boavista
           in: query
           required: false
           description: Parâmetro pefin|refin. Se true, retorna informações de PEFIN/REFIN Boa Vista.
