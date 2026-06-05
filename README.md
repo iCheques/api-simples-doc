@@ -114,14 +114,14 @@ GET
 **cURL:**
 
 ```bash
-curl --location 'https://irql.credithub.com.br/simples/abcdef12345/08075274000402' \
+curl --location 'https://irql.credithub.com.br/simples/SUA_CHAVE_DE_API/12345678000199' \
 --header 'Content-Type: application/json'
 ```
 
 **JavaScript (usando fetch):**
 
 ```javascript
-fetch("https://irql.credithub.com.br/simples/abcdef12345/08075274000402", {
+fetch("https://irql.credithub.com.br/simples/SUA_CHAVE_DE_API/12345678000199", {
   method: "GET",
   headers: {
     "Content-Type": "application/json",
@@ -232,7 +232,7 @@ fetch("https://irql.credithub.com.br/simples/abcdef12345/08075274000402", {
 - `ccf`: Informações sobre Cheques sem Fundo (CCF).
 - `rfb`: Informações adicionais da Receita Federal.
 - `protestos`: Registro de protestos.
-- `processos`: Registro de processos judiciais.
+- `processos`: Registro de processos judiciais. Veja [API-Processos-Juridicos.md](API-Processos-Juridicos.md).
 - `veiculos`: Veja documentação nas seções abaixo (se solicitado via parâmetro `veiculos`).
 - `pefin|refin`: Veja documentação nas seções **PEFIN/REFIN Serasa** e **PEFIN/REFIN Boa Vista** (se solicitado via parâmetro `pefin|refin`).
 - `completed`: Indica que todas as consultas foram concluídas
@@ -245,64 +245,64 @@ fetch("https://irql.credithub.com.br/simples/abcdef12345/08075274000402", {
 {
   "msg": "",
   "status": "sucesso",
-  "parametro": "02492851000124",
+  "parametro": "12345678000199",
   "informacoes": [
     {
       "user": {
-        "Razao_Social": "AXON OLEO & GAS COMERCIO DE PECAS SOBRESSALENTES LTDA",
-        "CNPJ": "02492851000124",
+        "Razao_Social": "EMPRESA EXEMPLO LTDA",
+        "CNPJ": "12345678000199",
         "Nire": "",
-        "Data_da_Fundacao": "28/04/1998",
+        "Data_da_Fundacao": "15/03/2010",
         "Insc._Estadual": "",
         "Situacao_CNPJ": "ATIVA",
-        "Data": "03/07/2024",
+        "Data": "05/06/2026",
         "Natureza_Juridica": "2062-SOCIEDADE EMPRESARIA LIMITADA",
-        "Ramo_de_Atividade_Primario": "4663000-COMÉRCIO ATACADISTA DE MÁQUINAS E EQUIPAMENTOS PARA USO INDUSTRIAL; PARTES E PEÇAS"
+        "Ramo_de_Atividade_Primario": "6201500-DESENVOLVIMENTO DE PROGRAMAS DE COMPUTADOR SOB ENCOMENDA"
       },
       "bello": [
         {
           "ocorrencia": "",
           "entrada": "",
-          "vencimento": "10/04/2024",
-          "valor": "4.069,28",
-          "informante": "BASE I",
-          "contrato": "4100177816",
+          "vencimento": "10/04/2026",
+          "valor": "1.250,00",
+          "informante": "EXEMPLO",
+          "contrato": "0000000001",
           "avalista": "NAO",
           "cidade": "",
           "uf": "",
           "situacao": "",
-          "credor": "PETROLEO BRASILEIRO S/A PETROBRAS",
+          "credor": "CREDOR EXEMPLO S/A",
           "orgaoemissor": "SerasaExperian-Pefin",
           "totalpendencias": "1",
           "totalcredores": "",
-          "totalvalor": "4.069,28",
+          "totalvalor": "1.250,00",
           "categoria": "PENDÊNCIAS FINANCEIRAS",
           "modalidade": "OUTRAS OPER"
         },
         {
           "ocorrencia": "",
           "entrada": "",
-          "vencimento": "11/02/2024",
-          "valor": "286.045,69",
-          "informante": "BASE I",
-          "contrato": "000615127",
+          "vencimento": "11/02/2026",
+          "valor": "3.500,00",
+          "informante": "EXEMPLO",
+          "contrato": "0000000002",
           "avalista": "NAO",
           "cidade": "",
           "uf": "",
           "situacao": "",
-          "credor": "PETROLEO BRASILEIRO S/A PETROBRAS",
+          "credor": "CREDOR EXEMPLO S/A",
           "orgaoemissor": "SerasaExperian-Pefin",
           "totalpendencias": "1",
           "totalcredores": "",
-          "totalvalor": "286.045,69",
+          "totalvalor": "3.500,00",
           "categoria": "PENDÊNCIAS FINANCEIRAS",
           "modalidade": "OUTRAS OPER"
         }
       ],
-      "valorTotalPendencias": 2449395.4,
-      "total": 43,
-      "valorTotalPendenciasFinanceiras": 2449395.4,
-      "totalPendenciasFinanceiras": 43,
+      "valorTotalPendencias": 4750.0,
+      "total": 2,
+      "valorTotalPendenciasFinanceiras": 4750.0,
+      "totalPendenciasFinanceiras": 2,
       "valorTotalPendenciasRefin": 0,
       "totalPendenciasRefin": 0,
       "valorTotalPendenciasVencidas": 0,
@@ -347,7 +347,7 @@ Cada objeto dentro do array `informacoes` contém os seguintes campos:
 | `entrada`         | Data de entrada da pendência (geralmente vazio).                                                     | String |                                                                   |
 | `vencimento`      | Data de vencimento da pendência (formato: "DD/MM/AAAA").                                             | String |                                                                   |
 | `valor`           | Valor da pendência (formato: "X.XXX,XX", com ponto separando milhares e vírgula separando decimais). | String |                                                                   |
-| `informante`      | Fonte da informação sobre a pendência (ex: "BASE I").                                                | String |                                                                   |
+| `informante`      | Identificador do informante da pendência.                                                            | String |                                                                   |
 | `contrato`        | Número do contrato relacionado à pendência.                                                          | String |                                                                   |
 | `avalista`        | Indica se há avalista na pendência ("SIM" ou "NAO").                                                 | String |                                                                   |
 | `cidade`          | Cidade do credor (geralmente vazio).                                                                 | String |                                                                   |
@@ -382,19 +382,19 @@ Cada objeto dentro do array `informacoes` contém os seguintes campos:
 {
   "dadosCadastrais": [
     {
-      "CpfCnpj": "02492851000124",
+      "CpfCnpj": "12345678000199",
       "Protocolo": "",
-      "NomeRazao": "AXON OLEO & GAS",
-      "NomeFantasia": "AXON OLEO & GAS COMERCIO DE PECAS SOBRESSALENTES LTDA",
-      "NascimentoFundacao": "28/04/1998",
-      "Idade": "28/04/1998",
+      "NomeRazao": "EMPRESA EXEMPLO LTDA",
+      "NomeFantasia": "EMPRESA EXEMPLO",
+      "NascimentoFundacao": "15/03/2010",
+      "Idade": "15/03/2010",
       "Sexo": "",
       "Signo": "",
       "NomeMae": "",
       "NomePai": "",
       "Rg": "",
       "OrigemCpf": "",
-      "DataSituacaoCadastral": "03/07/2024",
+      "DataSituacaoCadastral": "05/06/2026",
       "SituacaoCadastral": "ATIVO",
       "CapitalSocial": null,
       "NaturezaJuridica": "",
@@ -407,42 +407,30 @@ Cada objeto dentro do array `informacoes` contém os seguintes campos:
       "Cidade": null,
       "Uf": null,
       "Cep": null,
-      "DataConsulta": "03/07/2024 03:36:01"
+      "DataConsulta": "05/06/2026 10:00:00"
     }
   ],
   "spc": [
     [
       {
-        "NomeAssociado": "BANCO SANTANDER S/A",
-        "Valor": "5356,12",
-        "DataDeInclusao": "22/01/2024",
-        "DataDoVencimento": "05/12/2023",
+        "NomeAssociado": "BANCO EXEMPLO S/A",
+        "Valor": "1500,00",
+        "DataDeInclusao": "22/01/2026",
+        "DataDoVencimento": "05/12/2025",
         "Entidade": "",
-        "NumeroContrato": "MP385666000002791066",
+        "NumeroContrato": "0000000001",
         "CompradorFiadorAvalista": "COMPRADOR",
         "TelefoneAssociado": "",
         "CidadeAssociado": "",
         "UfAssociado": ""
       },
       {
-        "NomeAssociado": "BANCO SANTANDER S/A",
-        "Valor": "73934,2",
-        "DataDeInclusao": "04/01/2024",
-        "DataDoVencimento": "18/11/2023",
+        "NomeAssociado": "BANCO EXEMPLO S/A",
+        "Valor": "3200,50",
+        "DataDeInclusao": "04/01/2026",
+        "DataDoVencimento": "18/11/2025",
         "Entidade": "",
-        "NumeroContrato": "UG385630000000285030",
-        "CompradorFiadorAvalista": "COMPRADOR",
-        "TelefoneAssociado": "",
-        "CidadeAssociado": "",
-        "UfAssociado": ""
-      },
-      {
-        "NomeAssociado": "BANCO SANTANDER S/A",
-        "Valor": "1584,41",
-        "DataDeInclusao": "14/12/2023",
-        "DataDoVencimento": "26/09/2023",
-        "Entidade": "",
-        "NumeroContrato": "DE03856130017181",
+        "NumeroContrato": "0000000002",
         "CompradorFiadorAvalista": "COMPRADOR",
         "TelefoneAssociado": "",
         "CidadeAssociado": "",
@@ -510,19 +498,19 @@ Este JSON contém informações sobre um ou mais veículos.
 ```json
 [
   {
-    "placa": "PYI0623",
-    "municipio": "Teresina",
-    "uf": "PI",
-    "renavam": "1097352517",
-    "chassi": "9BHBG41DAHP651525",
-    "motor": "F4FAGU189152",
-    "ano_fabricacao": "2016",
-    "ano_modelo": "2017",
-    "marca_modelo": "HYUNDAI/HB20S 1.6M COMF",
+    "placa": "ABC1D23",
+    "municipio": "São Paulo",
+    "uf": "SP",
+    "renavam": "00000000001",
+    "chassi": "9BWZZZ377VT000001",
+    "motor": "MOTOR000001",
+    "ano_fabricacao": "2020",
+    "ano_modelo": "2021",
+    "marca_modelo": "MARCA/MODELO EXEMPLO 1.0",
     "procedencia": "",
     "especie": "",
-    "combustivel": "ALCOOL/GASOLINA",
-    "cor": "BRANCA"
+    "combustivel": "FLEX",
+    "cor": "PRATA"
   }
 ]
 ```
